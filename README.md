@@ -85,15 +85,21 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
      2. Run this server node via the command:
 ```../../cascade_server```
 
-     3. Similar to step 1, 2, but with the second server node 
+     3. Open a new terminal, and go to the docker container environment via: 
+```sudo docker exec -it -u0  cascadeimageenv bash```
+
+     4. Then Similar to step 1 and step 2, but with the second server node 
 ```cd ~/workspace/cascade/build-Release/src/service/cfg/n1```
 ```../../cascade_server```
 
-     4. Repeat the process to start 4 server nodes in total. (n0 ~ n3)
+     5. Repeat the process(step3 and step4) to start 4 server nodes in total. (n0 ~ n3)
 
 - There are various way to use the Cascade service, here we provide the simplist K/V put/get way of accessing Cascade from terminal. More details of other functionalities and services provided by Cascade can be found here: https://github.com/Derecho-Project/cascade/tree/nsdi2021/src/service
 
-     1. Go the the 5th node
+     1. Open another terminal, and go to the docker container environment via: 
+```sudo docker exec -it -u0  cascadeimageenv bash```
+
+     2. Go the the 5th node
 ```cd ~/workspace/cascade/build-Release/src/service/cfg/n4``` 
 
      2. Then start running client via
