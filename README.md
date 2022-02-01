@@ -93,13 +93,13 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 
 - There are various way to use the Cascade service, here we provide the simplist K/V put/get way of accessing Cascade from terminal. More details of other functionalities and services provided by Cascade can be found here: https://github.com/Derecho-Project/cascade/tree/nsdi2021/src/service
 
-1. Go the the 5th node
+     1. Go the the 5th node
 ```cd ~/workspace/cascade/build-Release/src/service/cfg/n4``` 
 
-2. Then start running client via
+     2. Then start running client via
 ```../../cascade_client```
 
-3. After the above command, you should be able to see the command prompt, ```cmd> help```, where you can type put/get operation, such as 
+     3. After the above command, you should be able to see the command prompt, ```cmd> help```, where you can type put/get operation, such as 
 ```put VCSS key1 value111``` (This command will put the object with key name: key1, and value: value111)
 Then get this via 
-```get VCSS key1 0 0``` (This command will get the object with key name: key1)
+```get VCSS key1``` (This command will get the object with key name: key1)
