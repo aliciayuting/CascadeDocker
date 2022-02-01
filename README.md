@@ -109,3 +109,8 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 ```put VCSS key1 value111``` (This command will put the object with key name: key1, and value: value111)
 Then get this via 
 ```get VCSS key1``` (This command will get the object with key name: key1)
+
+
+
+
+##### Building Docker image, is refered to this github repository: https://github.coecis.cornell.edu/yw2399/Docker
