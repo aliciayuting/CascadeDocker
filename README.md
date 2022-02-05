@@ -110,9 +110,9 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 ```../../cascade_client```
 
      3. After the above command, you should be able to see the command prompt, ```cmd> help```, where you can type put/get operation, such as 
-```put VCSS key1 value111``` (This command will put the object with key name: key1, and value: value111)
+```put VCSS key1 value111 0 0``` (This command will put the object with key name: key1, and value: value111, from the subgroup 0, type VCSS, in shard 0)
 Then get this via 
-```get VCSS key1``` (This command will get the object with key name: key1)
+```get VCSS key1 0 0``` (This command will get the object with key name: key1, from the subgroup 0, type 0, shard 0)
 
 
 
