@@ -82,7 +82,10 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
      1. Navigate to one of the server node configuration directory, using the command:
 ```cd ~/workspace/cascade/build-Release/src/service/cfg/n0```
 
-     2. Run this server node via the command:
+     2. first clear out the previous log in this node's directory:
+```rm -rf .plog/```
+
+     2. Then start this server node via the command:
 ```../../cascade_server```
 
      3. Open a new terminal, and go to the docker container environment via: 
@@ -90,6 +93,7 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 
      4. Then Similar to step 1 and step 2, but with the second server node 
 ```cd ~/workspace/cascade/build-Release/src/service/cfg/n1```
+```rm -rf .plog/```
 ```../../cascade_server```
 
      5. Repeat the process(step3 and step4) to start 4 server nodes in total. (n0 ~ n3)
