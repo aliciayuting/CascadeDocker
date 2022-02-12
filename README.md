@@ -113,12 +113,10 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 ```put PCSS key1 value111 0 0``` (This command will put the object with key name: key1, and value: value111, from the subgroup 0 with subgroup type PCSS, in shard 0)
 Then get this via 
 ```get PCSS key1 0 0``` (This command will get the object with key name: key1, from the subgroup 0 with subgroup type PCSS, shard 0)
-
 The subgroup type denote the way to store the key,value pair, if choose VCSS(VolatileCascadeStoreWithStringKey) then only the most recent version would be stored; if choose PCSS(PersistentCascadeStoreWithStringKey) then all the historical versions would be stored.
 
-
      4. Programming with Python API. 
-          a. To use python API, you need to first import the cascade_py package inside your python file, and create a Cascade client, using ``` cascade_py.ServiceClientAPI()```. Then you can write put and get functions. Note that the subgroup type need to be the full name, such as PersistentCascadeStoreWithStringKey, or VolatileCascadeStoreWithStringKey
+          a. To use python API, you need to first import the cascade_py package inside your python file, and create a Cascade client, using ```cascade_py.ServiceClientAPI()```. Then you can write put and get functions. Note that the subgroup type need to be the full name, such as PersistentCascadeStoreWithStringKey, or VolatileCascadeStoreWithStringKey
 
 
 ```
