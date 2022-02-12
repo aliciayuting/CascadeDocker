@@ -126,8 +126,7 @@ capi = cascade_py.ServiceClientAPI()
 ret = capi.put('PersistentCascadeStoreWithStringKey', key1, value1, subgroup_index=0, shard_index=0)
 print(ret.get_result())
 ```
-
-     To run this script you wrote, you need to move this python file (i.e. test.py) to the directory of ``` ~/workspace/cascade/build-Release/src/service/python/```, then in the current directory (``` ~/workspace/cascade/build-Release/src/service/cfg/n4```) to run ```python ../../python/test.py```
+To run this script you wrote, you need to move this python file (i.e. test.py) to the directory of ``` ~/workspace/cascade/build-Release/src/service/python/```, then in the current directory (``` ~/workspace/cascade/build-Release/src/service/cfg/n4```) to run ```python ../../python/test.py```
 
 
 
