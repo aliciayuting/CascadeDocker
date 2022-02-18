@@ -56,7 +56,7 @@ RUN apt-get -y install libspdlog-dev libssl-dev
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/derecho.git
 WORKDIR /root/workspace/derecho
-RUN git fetch && git checkout nsdi2021 && git pull
+RUN git fetch && git checkout master && git pull
 WORKDIR /root/workspace/derecho/scripts/prerequisites
 RUN ./install-libfabric.sh
 RUN ./install-mutils.sh
@@ -75,7 +75,7 @@ RUN ln -s build-Release/compile_commands.json
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/cascade.git
 WORKDIR /root/workspace/cascade
-RUN git fetch && git checkout nsdi2021 && git pull
+RUN git fetch && git checkout v1.0rc && git pull
 # Reconfigure the cfg for smaller required memory to run Cascade
 COPY ./cfg /root/workspace/cascade/src/service/
 
