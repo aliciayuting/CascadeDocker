@@ -5,11 +5,11 @@ EXPOSE 22/tcp
 RUN apt update
 RUN apt upgrade -y --fix-missing
 
-ENV LOCAL_OPT=/root/opt-dev
+ENV LOCAL_OPT=/usr/local
 ENV C_INCLUDE_PATH=$LOCAL_OPT/include
 ENV CPLUS_INCLUDE_PATH=$LOCAL_OPT/include
 ENV CMAKE_PREFIX_PATH=$LOCAL_OPT/
-ENV LIBRARY_PATH=$LOCAL_OPT/lib/
+ENV LIBRARY_PATH=$LOCAL_OPT/lib/:/usr/local/lib/
 ENV LD_LIBRARY_PATH=$LOCAL_OPT/lib/:/usr/local/lib/
 ENV JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64/
 
@@ -22,7 +22,7 @@ WORKDIR /root/workspace/prerequisites/json
 RUN git checkout tags/v3.9.1
 RUN mkdir /root/workspace/prerequisites/json/build
 WORKDIR /root/workspace/prerequisites/json/build
-RUN cmake -DCMAKE_INSTALL_PREFIX=/root/opt-dev/ ..
+RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ ..
 RUN make -j
 RUN make install
 # 2.fuse
@@ -33,12 +33,12 @@ WORKDIR /root/workspace/prerequisites/libfuse
 RUN git checkout tags/fuse-3.9.4
 RUN mkdir build
 WORKDIR /root/workspace/prerequisites/libfuse/build
-RUN meson --prefix=/root/opt-dev ..
+RUN meson --prefix=/usr/local ..
 RUN ninja
 RUN ninja install
 # 3.boolinq
-RUN mkdir /root/opt-dev/include/boolinq
-COPY boolinq.h /root/opt-dev/include/boolinq/
+RUN mkdir /usr/local/include/boolinq
+COPY boolinq.h /usr/local/include/boolinq/
 # 4.pybind11
 RUN pip3 install pybind11
 # 5.ssh
@@ -69,7 +69,7 @@ RUN chmod +x /root/workspace/derecho/scripts/build/build.sh
 USER root
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
-RUN make DESTDIR=/root/opt-dev install
+RUN make DESTDIR=/usr/local install
 WORKDIR /root/workspace/derecho/
 RUN ln -s build-Release/compile_commands.json
 #RUN sysctl -w vm.overcommit_memory=1
