@@ -65,6 +65,7 @@ RUN ./install-mutils-containers.sh
 RUN ./install-json.sh
 WORKDIR /root/workspace/derecho
 COPY ./build.sh /root/workspace/derecho/scripts/build/
+RUN chmod +x /root/workspace/derecho/scripts/build/build.sh
 USER root
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
