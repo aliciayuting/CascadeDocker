@@ -66,7 +66,7 @@ RUN ./install-json.sh
 WORKDIR /root/workspace/derecho
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
-RUN cmake -DCMAKE_INSTALL_PREFIX=/root/opt-dev ..
+cmake -DCMAKE_INSTALL_PREFIX=/root/opt-dev ..
 RUN make DESTDIR=/root/opt-dev install
 WORKDIR /root/workspace/derecho/
 RUN ln -s build-Release/compile_commands.json
