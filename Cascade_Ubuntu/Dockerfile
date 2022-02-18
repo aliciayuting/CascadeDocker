@@ -66,6 +66,7 @@ RUN ./install-json.sh
 WORKDIR /root/workspace/derecho
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
+RUN cmake -DCMAKE_INSTALL_PREFIX=/root/opt-dev ..
 RUN make DESTDIR=/root/opt-dev install
 WORKDIR /root/workspace/derecho/
 RUN ln -s build-Release/compile_commands.json
@@ -86,7 +87,7 @@ RUN ./install-rpclib.sh
 WORKDIR /root/workspace/cascade/
 RUN ./build.sh Release
 WORKDIR /root/workspace/cascade/build-Release
-RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
+cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
 
 
