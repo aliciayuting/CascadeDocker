@@ -65,6 +65,8 @@ RUN ./install-mutils-containers.sh
 RUN ./install-json.sh
 WORKDIR /root/workspace/derecho
 COPY ./build.sh /root/workspace/derecho/scripts/build/
+RUN chown -R admin:admin /root/workspace/derecho/scripts/build/build.sh
+RUN chmod 755 /root/workspace/derecho/scripts/build/build.sh
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
 RUN make DESTDIR=/root/opt-dev install
