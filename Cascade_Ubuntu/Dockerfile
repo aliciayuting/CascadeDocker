@@ -87,7 +87,7 @@ RUN ./install-rpclib.sh
 WORKDIR /root/workspace/cascade/
 RUN ./build.sh Release
 WORKDIR /root/workspace/cascade/build-Release
-cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
+RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
 
 
