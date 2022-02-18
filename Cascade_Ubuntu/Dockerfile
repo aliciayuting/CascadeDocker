@@ -5,7 +5,7 @@ EXPOSE 22/tcp
 RUN apt update
 RUN apt upgrade -y --fix-missing
 
-ENV LOCAL_OPT=/usr/local
+ENV LOCAL_OPT=/root/opt-dev
 ENV C_INCLUDE_PATH=$LOCAL_OPT/include
 ENV CPLUS_INCLUDE_PATH=$LOCAL_OPT/include
 ENV CMAKE_PREFIX_PATH=$LOCAL_OPT/
@@ -69,7 +69,7 @@ RUN chmod +x /root/workspace/derecho/scripts/build/build.sh
 USER root
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
-RUN make DESTDIR=/usr/local install
+RUN make install
 WORKDIR /root/workspace/derecho/
 RUN ln -s build-Release/compile_commands.json
 #RUN sysctl -w vm.overcommit_memory=1
