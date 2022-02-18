@@ -64,9 +64,9 @@ RUN ./install-mutils-tasks.sh
 RUN ./install-mutils-containers.sh
 RUN ./install-json.sh
 WORKDIR /root/workspace/derecho
+COPY ./build.sh /root/workspace/derecho/scripts/build/
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
-cmake -DCMAKE_INSTALL_PREFIX=/root/opt-dev ..
 RUN make DESTDIR=/root/opt-dev install
 WORKDIR /root/workspace/derecho/
 RUN ln -s build-Release/compile_commands.json
