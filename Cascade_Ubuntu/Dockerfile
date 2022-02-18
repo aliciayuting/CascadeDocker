@@ -40,7 +40,9 @@ RUN ninja install
 RUN mkdir /usr/local/include/boolinq
 COPY boolinq.h /usr/local/include/boolinq/
 # 4.pybind11
-RUN pip3 install pybind11
+RUN pip3 install build pybind11
+# PYTHON dependency
+RUN apt install python3.8-venv
 # 5.ssh
 RUN apt-get install ssh
 RUN ssh-keygen -A
@@ -48,7 +50,6 @@ RUN service ssh start
 COPY id_rsa.pub /root/.ssh/authorized_keys
 # 6. java
 RUN apt install -y openjdk-16-jdk-headless --fix-missing
-
 
 # install derecho and its prerequisites
 RUN apt-get -y install libspdlog-dev libssl-dev
@@ -80,7 +81,11 @@ RUN git clone https://github.com/Derecho-Project/cascade.git
 WORKDIR /root/workspace/cascade
 RUN git fetch && git checkout v1.0rc && git pull
 # Reconfigure the cfg for smaller required memory to run Cascade
-COPY ./cfg /root/workspace/cascade/src/service/
+COPY ./cfg/n0/derecho.cfg /root/workspace/cascade/src/service/cfg/n0/
+COPY ./cfg/n1/derecho.cfg /root/workspace/cascade/src/service/cfg/n1/
+COPY ./cfg/n2/derecho.cfg /root/workspace/cascade/src/service/cfg/n2/
+COPY ./cfg/n3/derecho.cfg /root/workspace/cascade/src/service/cfg/n3/
+COPY ./cfg/n4/derecho.cfg /root/workspace/cascade/src/service/cfg/n4/
 
 WORKDIR /root/workspace/cascade
 WORKDIR /root/workspace/cascade/scripts/prerequisites
@@ -92,7 +97,5 @@ WORKDIR /root/workspace/cascade/build-Release
 RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
 
-
 # entry point
 WORKDIR /root
-

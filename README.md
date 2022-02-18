@@ -23,11 +23,11 @@ Here are the steps of how to pull the docker image:
 1. ssh into the Ubuntu environment(container/virtual machine), install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
-```sudo docker run --privileged -d -it --name=casenv yy354/cascadeimage_docker:5.0```
+```sudo docker run --privileged -d -it --name=casenv5 yy354/cascadeimage_docker:5.8```
 
 3. Then run the below command to shift the terminal to the docker image container that we just built
 
-```sudo docker exec -it -u0  casenv bash```
+```sudo docker exec -it -u0  casenv5 bash```
 
 4. By now, you should be able to see the setup in the folder.
      - opt-dev folder contains all the dependencies and libraries needed to run Cascade
@@ -129,5 +129,7 @@ The subgroup type denote the way to store the key,value pair, if choose VCSS(Vol
      To run this script you wrote, you need to move this python file (i.e. test.py) to the directory of ``` ~/workspace/cascade/build-Release/src/service/python/```, then in the current directory (``` ~/workspace/cascade/build-Release/src/service/cfg/n4```) to run ```python ../../python/test.py```
 
 
+### Running Cascade via Python API
+Please refer to the detailed tutorial: https://github.com/Derecho-Project/cascade/tree/v1.0rc/src/service/python 
 
 ###### Building Docker image, is refered to this github repository: https://github.coecis.cornell.edu/yw2399/Docker
