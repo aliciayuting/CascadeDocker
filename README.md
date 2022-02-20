@@ -118,13 +118,13 @@ The subgroup type denote the way to store the key,value pair, if choose VCSS(Vol
      4. Programming with Python API.  To program a python code as client using python API, you need to first import the cascade_py package inside your python file, and create a Cascade client, using ```cascade_py.ServiceClientAPI()```. Then you can write put and get functions. Note that the subgroup type need to be the full name, such as PersistentCascadeStoreWithStringKey, or VolatileCascadeStoreWithStringKey
      ```
      #!/usr/bin/env python3
-     import cascade_py
+     from derecho.cascade.client import ServiceClientAPI
      if __name__ == '__main__':
-     key1 = '/testkey01'
-     value1 =bytes('foo'.encode())
-     capi = cascade_py.ServiceClientAPI()
-     ret = capi.put('PersistentCascadeStoreWithStringKey', key1, value1, subgroup_index=0, shard_index=0)
-     print(ret.get_result())
+          key1 = '/testkey01'
+          value1 =bytes('foo'.encode())
+          capi = ServiceClientAPI()
+          ret = capi.put('PersistentCascadeStoreWithStringKey', key1, value1, subgroup_index=0, shard_index=0)
+          print(ret.get_result())
      ```
      To run this script you wrote, you need to move this python file (i.e. test.py) to the directory of ``` ~/workspace/cascade/build-Release/src/service/python/```, then in the current directory (``` ~/workspace/cascade/build-Release/src/service/cfg/n4```) to run ```python ../../python/test.py```
 
