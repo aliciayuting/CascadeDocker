@@ -95,6 +95,7 @@ RUN make install
 RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n0/derecho.cfg /root/workspace/cascade/build-Release/src/service/cfg/n0/
 RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n1/derecho.cfg /root/workspace/cascade/build-Release/src/service/cfg/n1/
 RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n2/derecho.cfg /root/workspace/cascade/build-Release/src/service/cfg/n2/
+RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/layout.json /root/workspace/cascade/build-Release/src/service/cfg/
 RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n3/
 RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n4/
 RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n5/
