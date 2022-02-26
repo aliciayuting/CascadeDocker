@@ -81,6 +81,16 @@ RUN git clone https://github.com/Derecho-Project/cascade.git
 WORKDIR /root/workspace/cascade
 RUN git fetch && git checkout v1.0rc && git pull
 
+# Reconfigure the cfg for smaller required memory to run Cascade
+RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n0/derecho.cfg /root/workspace/cascade/src/service/cfg/n0/
+RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n1/derecho.cfg /root/workspace/cascade/src/service/cfg/n1/
+RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n2/derecho.cfg /root/workspace/cascade/src/service/cfg/n2/
+RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/layout.json /root/workspace/cascade/src/service/cfg/
+RUN rm -rf /root/workspace/cascade/src/service/cfg/n3/
+RUN rm -rf /root/workspace/cascade/src/service/cfg/n4/
+RUN rm -rf /root/workspace/cascade/src/service/cfg/n5/
+RUN rm -rf /root/workspace/cascade/src/service/cfg/n6/
+
 WORKDIR /root/workspace/cascade
 WORKDIR /root/workspace/cascade/scripts/prerequisites
 RUN ./install-rpclib.sh 
@@ -91,15 +101,7 @@ WORKDIR /root/workspace/cascade/build-Release
 RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
 
-# Reconfigure the cfg for smaller required memory to run Cascade
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n0/derecho.cfg /root/workspace/cascade/build-Release/src/service/cfg/n0/
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n1/derecho.cfg /root/workspace/cascade/build-Release/src/service/cfg/n1/
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n2/derecho.cfg /root/workspace/cascade/build-Release/src/service/cfg/n2/
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/layout.json /root/workspace/cascade/build-Release/src/service/cfg/
-RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n3/
-RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n4/
-RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n5/
-RUN rm -rf /root/workspace/cascade/build-Release/src/service/cfg/n6/
+
 
 # entry point
 WORKDIR /root
