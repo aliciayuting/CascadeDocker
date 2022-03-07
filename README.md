@@ -23,11 +23,11 @@ Here are the steps of how to pull the docker image:
 1. ssh into the Ubuntu environment(container/virtual machine), install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
-```sudo docker run --privileged -d -it --name=casenv5 yy354/cascadeimage_docker:5.8```
+```sudo docker run --privileged -d -it --name=casenv7 yy354/cascadeimage_docker:7.0```
 
 3. Then run the below command to shift the terminal to the docker image container that we just built
 
-```sudo docker exec -it -u0  casenv5 bash```
+```sudo docker exec -it -u0  casenv7 bash```
 
 4. By now, you should be able to see the setup in the folder.
      - opt-dev folder contains all the dependencies and libraries needed to run Cascade
@@ -78,7 +78,7 @@ Here are the steps of how to pull the docker image:
 Cascade has a key-value sharding structure. That allows users to store objects, and compute using user defined logic. The server nodes on Cascade start the service, and the client nodes can interact with Cascade via put/get operations, JAVA API, Python API, Fuse file system, and other user defined logic.
 
 ### Running Cascade
-- To start the Cascade service, you need to first run at least 4 Cascade server nodes to start the service. 
+- To start the Cascade service, you need to first run 2 Cascade server nodes to start the service. 
      1. Navigate to one of the server node configuration directory, using the command:
 ```cd ~/workspace/cascade/build-Release/src/service/cfg/n0```
 
@@ -96,7 +96,7 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 ```rm -rf .plog/```
 ```../../cascade_server```
 
-     5. Repeat the process(step3 and step4) to start 4 server nodes in total. (n0 ~ n3)
+     5. Repeat the process(step3 and step4) to start 2 server nodes in total. (n0 ~ n1)
 
 - There are various way to use the Cascade service, here we provide the simplist K/V put/get way of accessing Cascade from terminal. More details of other functionalities and services provided by Cascade can be found here: https://github.com/Derecho-Project/cascade/tree/v1.0rc/src/service
 
@@ -104,7 +104,7 @@ Cascade has a key-value sharding structure. That allows users to store objects, 
 ```sudo docker exec -it -u0  cascadeimageenv bash```
 
      2. Go the the 5th node
-```cd ~/workspace/cascade/build-Release/src/service/cfg/n4``` 
+```cd ~/workspace/cascade/build-Release/src/service/cfg/n2``` 
 
      2. Then start running client via
 ```../../cascade_client```
@@ -126,7 +126,7 @@ The subgroup type denote the way to store the key,value pair, if choose VCSS(Vol
           ret = capi.put( key1, value1,subgroup_type='PersistentCascadeStoreWithStringKey', subgroup_index=0, shard_index=0)
           print(ret.get_result())
      ```
-     To run this script you wrote, you need to move this python file (i.e. test.py) to the directory of ``` ~/workspace/cascade/build-Release/src/service/python/```, then in the current directory (``` ~/workspace/cascade/build-Release/src/service/cfg/n4```) to run ```python ../../python/test.py```
+     To run this script you wrote, you need to move this python file (i.e. test.py) to the directory of ``` ~/workspace/cascade/build-Release/src/service/python/```, then in the current directory (``` ~/workspace/cascade/build-Release/src/service/cfg/n2```) to run ```python ../../python/test.py```
 
 
 ### Running Cascade via Python API
