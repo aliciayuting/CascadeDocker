@@ -57,7 +57,7 @@ RUN apt-get -y install libspdlog-dev libssl-dev
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/derecho.git
 WORKDIR /root/workspace/derecho
-RUN git fetch && git checkout master && git pull
+RUN git fetch && git checkout for_cascade_get_api && git checkout 0ac2fb535f372cb964c823baf1391b1e2f2241dd && git pull
 WORKDIR /root/workspace/derecho/scripts/prerequisites
 RUN ./install-libfabric.sh
 RUN ./install-mutils.sh
