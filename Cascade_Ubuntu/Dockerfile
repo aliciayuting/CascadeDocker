@@ -82,14 +82,13 @@ WORKDIR /root/workspace/cascade
 RUN git fetch && git checkout v1.0rc && git pull
 
 # Reconfigure the cfg for smaller required memory to run Cascade
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n0/derecho.cfg /root/workspace/cascade/src/service/cfg/n0/
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n1/derecho.cfg /root/workspace/cascade/src/service/cfg/n1/
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/n2/derecho.cfg /root/workspace/cascade/src/service/cfg/n2/
-RUN cp /root/workspace/cascade/src/applications/standalone/kvs_client/cfg/layout.json /root/workspace/cascade/src/service/cfg/
-RUN rm -rf /root/workspace/cascade/src/service/cfg/n3/
-RUN rm -rf /root/workspace/cascade/src/service/cfg/n4/
-RUN rm -rf /root/workspace/cascade/src/service/cfg/n5/
-RUN rm -rf /root/workspace/cascade/src/service/cfg/n6/
+COPY ./cfg/n0/derecho.cfg /root/workspace/cascade/src/service/cfg/n0/
+COPY ./cfg/n1/derecho.cfg /root/workspace/cascade/src/service/cfg/n1/
+COPY ./cfg/n2/derecho.cfg /root/workspace/cascade/src/service/cfg/n2/
+COPY ./cfg/n3/derecho.cfg /root/workspace/cascade/src/service/cfg/n3/
+COPY ./cfg/n4/derecho.cfg /root/workspace/cascade/src/service/cfg/n4/
+COPY ./cfg/n5/derecho.cfg /root/workspace/cascade/src/service/cfg/n5/
+COPY ./cfg/n6/derecho.cfg /root/workspace/cascade/src/service/cfg/n6/
 
 WORKDIR /root/workspace/cascade
 WORKDIR /root/workspace/cascade/scripts/prerequisites
