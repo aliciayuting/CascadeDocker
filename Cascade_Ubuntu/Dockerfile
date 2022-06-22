@@ -1,6 +1,6 @@
 FROM songweijia/devel:mlnxofed5.3-cuda11.03-ubuntu20.04
 
-LABEL maintainer="yw2399@cornell.edu"
+LABEL maintainer="yy354@cornell.edu"
 EXPOSE 22/tcp
 RUN apt update
 RUN apt upgrade -y --fix-missing
@@ -25,6 +25,8 @@ WORKDIR /root/workspace/prerequisites/json/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ ..
 RUN make -j
 RUN make install
+# Readline library v7.0
+RUN apt install libreadline-dev
 # 2.fuse
 RUN apt-get -y install meson udev --fix-missing
 WORKDIR /root/workspace/prerequisites
@@ -57,7 +59,7 @@ RUN apt-get -y install libspdlog-dev libssl-dev
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/derecho.git
 WORKDIR /root/workspace/derecho
-RUN git fetch && git checkout for_cascade_get_api && git checkout 0ac2fb535f372cb964c823baf1391b1e2f2241dd 
+RUN git fetch && git checkout for_cascade_get_api && git checkout 3f24e06ed5ad572eb82206e8c1024935d03e903e 
 WORKDIR /root/workspace/derecho/scripts/prerequisites
 RUN ./install-libfabric.sh
 RUN ./install-mutils.sh
@@ -81,15 +83,6 @@ RUN git clone https://github.com/Derecho-Project/cascade.git
 WORKDIR /root/workspace/cascade
 RUN git fetch && git checkout v1.0rc && git pull
 
-# Reconfigure the cfg for smaller required memory to run Cascade
-COPY ./cfg/n0/derecho.cfg /root/workspace/cascade/src/service/cfg/n0/
-COPY ./cfg/n1/derecho.cfg /root/workspace/cascade/src/service/cfg/n1/
-COPY ./cfg/n2/derecho.cfg /root/workspace/cascade/src/service/cfg/n2/
-COPY ./cfg/n3/derecho.cfg /root/workspace/cascade/src/service/cfg/n3/
-COPY ./cfg/n4/derecho.cfg /root/workspace/cascade/src/service/cfg/n4/
-COPY ./cfg/n5/derecho.cfg /root/workspace/cascade/src/service/cfg/n5/
-COPY ./cfg/n6/derecho.cfg /root/workspace/cascade/src/service/cfg/n6/
-
 WORKDIR /root/workspace/cascade
 WORKDIR /root/workspace/cascade/scripts/prerequisites
 RUN ./install-rpclib.sh 
@@ -99,7 +92,9 @@ RUN ./build.sh Release
 WORKDIR /root/workspace/cascade/build-Release
 RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
-
+# build cascade_py
+WORKDIR /root/workspace/cascade/build-Release/src/service/python/dist
+RUN pip3 install derecho.cascade-1.0rc0-py3-none-any.whl
 
 
 # entry point
