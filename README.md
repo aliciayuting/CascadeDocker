@@ -23,11 +23,11 @@ Here are the steps of how to pull the docker image:
 1. ssh into the Ubuntu environment(container/virtual machine), install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
-```sudo docker run --privileged -d -it --name=casenv7 yy354/cascadeimage_docker:7.1```
+```sudo docker run --privileged -d -it --name=casenv yy354/cascadeimage_docker:v1.0```
 
 3. Then run the below command to shift the terminal to the docker image container that we just built
 
-```sudo docker exec -it -u0  casenv7 bash```
+```sudo docker exec -it -u0  casenv bash```
 
 4. By now, you should be able to see the setup in the folder.
      - opt-dev folder contains all the dependencies and libraries needed to run Cascade

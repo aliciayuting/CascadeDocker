@@ -21,7 +21,7 @@ RUN mkdir -p /root/workspace/prerequisites
 WORKDIR /root/workspace/prerequisites
 RUN git clone https://github.com/nlohmann/json.git
 WORKDIR /root/workspace/prerequisites/json
-RUN git checkout tags/v3.9.1
+# RUN git checkout tags/v3.9.1
 RUN mkdir /root/workspace/prerequisites/json/build
 WORKDIR /root/workspace/prerequisites/json/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ ..
@@ -51,7 +51,7 @@ RUN apt install python3.8-venv
 RUN apt-get install ssh
 RUN ssh-keygen -A
 RUN service ssh start
-COPY id_rsa.pub /root/.ssh/authorized_keys
+# COPY id_rsa.pub /root/.ssh/authorized_keys
 # 6. java
 RUN apt install -y openjdk-16-jdk-headless --fix-missing
 
@@ -61,7 +61,7 @@ RUN apt-get -y install libspdlog-dev libssl-dev
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/derecho.git
 WORKDIR /root/workspace/derecho
-RUN git fetch && git checkout for_cascade_get_api && git checkout 3f24e06ed5ad572eb82206e8c1024935d03e903e 
+RUN git fetch && git checkout 3f24e06ed5ad572eb82206e8c1024935d03e903e 
 WORKDIR /root/workspace/derecho/scripts/prerequisites
 RUN ./install-libfabric.sh
 RUN ./install-mutils.sh
