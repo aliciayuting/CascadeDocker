@@ -99,7 +99,7 @@ RUN make -j32
 RUN make install
 # build cascade_py
 WORKDIR /root/workspace/cascade/build-Release/src/service/python/dist
-RUN pip3 install derecho.cascade-1.0rc0-py3-none-any.whl
+# RUN pip3 install derecho.cascade-1.0rc0-py3-none-any.whl
 
 
 # entry point
