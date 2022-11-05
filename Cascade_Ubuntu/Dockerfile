@@ -46,7 +46,7 @@ COPY boolinq.h /usr/local/include/boolinq/
 # 4.pybind11
 RUN pip3 install build pybind11
 # PYTHON dependency
-RUN apt install python3.8-venv
+RUN apt install python3.10-venv
 # 5.ssh
 RUN apt-get install ssh
 RUN ssh-keygen -A
@@ -61,7 +61,6 @@ RUN apt-get -y install libspdlog-dev libssl-dev
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/derecho.git
 WORKDIR /root/workspace/derecho
-RUN git fetch && git checkout 3f24e06ed5ad572eb82206e8c1024935d03e903e 
 WORKDIR /root/workspace/derecho/scripts/prerequisites
 RUN ./install-libfabric.sh
 RUN ./install-mutils.sh
@@ -83,7 +82,6 @@ RUN ln -s build-Release/compile_commands.json
 WORKDIR /root/workspace
 RUN git clone https://github.com/Derecho-Project/cascade.git
 WORKDIR /root/workspace/cascade
-RUN git fetch && git checkout v1.0rc && git pull
 
 WORKDIR /root/workspace/cascade
 WORKDIR /root/workspace/cascade/scripts/prerequisites
@@ -92,7 +90,7 @@ RUN ./install-rpclib.sh
 WORKDIR /root/workspace/cascade/
 RUN ./build.sh Release
 WORKDIR /root/workspace/cascade/build-Release
-RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.8/dist-packages/pybind11/share/cmake/pybind11 ..
+RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.10/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
 # build cascade_py
 WORKDIR /root/workspace/cascade/build-Release/src/service/python/dist
