@@ -47,8 +47,7 @@ COPY boolinq.h /usr/local/include/boolinq/
 RUN pip3 install build pybind11
 # PYTHON dependency
 RUN apt-get update -y
-RUN apt-get install -y python3.10
-ENV PYTHON_VERSION=3.10.0
+RUN apt-get install -y python3.10-venv
 # 5.ssh
 RUN apt-get install ssh
 RUN ssh-keygen -A
