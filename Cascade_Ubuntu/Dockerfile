@@ -91,6 +91,9 @@ RUN ./install-rpclib.sh
 WORKDIR /root/workspace/cascade/
 RUN ./build.sh Release
 WORKDIR /root/workspace/cascade/build-Release
+RUN pip3 install virtualenv
+RUN pip3 install build
+RUN pip3 install setuptools
 RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.10/dist-packages/pybind11/share/cmake/pybind11 ..
 RUN make install
 # build cascade_py
