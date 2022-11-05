@@ -1,4 +1,4 @@
-FROM songweijia/devel:mlnxofed5.3-cuda11.03-ubuntu22.04
+FROM songweijia/devel:mlnxofed5.7-cuda11.7-ubuntu22.04 
 
 LABEL maintainer="yy354@cornell.edu"
 EXPOSE 22/tcp
