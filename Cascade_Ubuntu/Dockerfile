@@ -2,8 +2,6 @@ FROM songweijia/devel:mlnxofed5.7-cuda11.7-ubuntu22.04
 
 LABEL maintainer="yy354@cornell.edu"
 EXPOSE 22/tcp
-RUN rm /etc/apt/sources.list.d/cuda.list
-RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 RUN apt update
 RUN apt upgrade -y --fix-missing
 
