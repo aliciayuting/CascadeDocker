@@ -1,7 +1,7 @@
 # How to use Cascade from docker image
 ## Running Environment
 ### Cascade runtime require:
-- Ubuntu18 or Ubuntu20, with C++ compiler supporting C++17: GCC 8.3+
+- Ubuntu18 or Ubuntu20, with C++ compiler supporting C++17: GCC 8.3+, Python3.10
 
 - More dependencies can be viewed on Cascade github repository: https://github.com/Derecho-Project/cascade.git
 
@@ -23,11 +23,11 @@ Here are the steps of how to pull the docker image:
 1. ssh into the Ubuntu environment(container/virtual machine), install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
-```sudo docker run --privileged -d -it --name=casenv yy354/cascadeimage_docker:v1.0```
+```sudo docker run --privileged -d -it --name=tideenv yy354/cascadetide_docker:v1.1```
 
 3. Then run the below command to shift the terminal to the docker image container that we just built
 
-```sudo docker exec -it -u0  casenv bash```
+```sudo docker exec -it -u0  tideenv bash```
 
 4. By now, you should be able to see the setup in the folder.
      - opt-dev folder contains all the dependencies and libraries needed to run Cascade
