@@ -1,83 +1,74 @@
-#!/bin/bash
+FROM songweijia/devel:cascade.generic.ubuntu22.04
 
-# case insensitive for string comparison
-shopt -s nocasematch
+LABEL maintainer="yy354@cornell.edu"
 
-colorful_print() {
-    color_prefix="0;30"
-    case $1 in
-        "red")
-            color_prefix="0;31"
-            ;;
-        "green")
-            color_prefix="0;32"
-            ;;
-        "orange")
-            color_prefix="0;33"
-            ;;
-        "blue")
-            color_prefix="0;34"
-            ;;
-        "purple")
-            color_prefix="0;35"
-            ;;
-        "cyan")
-            color_prefix="0;36"
-            ;;
-        "lightgray")
-            color_prefix="0;37"
-            ;;
-        "darkgray")
-            color_prefix="1;30"
-            ;;
-        "lightred")
-            color_prefix="1;31"
-            ;;
-        "lightgreen")
-            color_prefix="1;32"
-            ;;
-        "yellow")
-            color_prefix="1;33"
-            ;;
-        "lightblue")
-            color_prefix="1;34"
-            ;;
-        "lightpurple")
-            color_prefix="1;35"
-            ;;
-        "lightcyan")
-            color_prefix="1;36"
-            ;;
-        "white")
-            color_prefix="1;37"
-            ;;
-    esac;
-    echo -e "\e[${color_prefix}m $2 $3 $4 $5 $6 $7 $8 $9 \e[0m"
-}
+RUN apt update
+RUN apt upgrade -y --fix-missing
 
-if [[ $# -lt 1 ]]; then
-    colorful_print orange "USAGE: $0 <Release|Debug|RelWithDebInfo|Benchmark|Clear> [USE_VERBS_API]"
-    exit -1
-fi
+ENV LOCAL_OPT=/root/opt-dev
+ENV C_INCLUDE_PATH=$LOCAL_OPT/include
+ENV CPLUS_INCLUDE_PATH=$LOCAL_OPT/include
+ENV CMAKE_PREFIX_PATH=$LOCAL_OPT/
+ENV LIBRARY_PATH=$LOCAL_OPT/lib/:/usr/local/lib/
+ENV LD_LIBRARY_PATH=$LOCAL_OPT/lib/:/usr/local/lib/
+ENV JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64/
 
-if [[ $1 == "Clear" ]]; then
-    rm -rf build-*
-    exit 0
-fi
+# 1. Clean the previously built Derecho&Cascade libraries
+RUN rm -rf /root/opt-dev/include/derecho
+RUN rm -rf /root/opt-dev/include/cascade
+RUN rm -rf /root/opt-dev/lib/libderecho*
+RUN rm -rf /root/opt-dev/lib/libcascade*
+RUN rm -rf /root/opt-dev/lib/cmake/cascade
+RUN rm -rf /root/opt-dev/lib/cmake/derecho
+RUN rm -rf /root/opt-dev/bin/cascade*
+RUN rm -rf /root/opt-dev/share/derecho
 
-build_type=$1
-install_prefix="/root/opt-dev/"
-cmake_defs="-DCMAKE_BUILD_TYPE=${build_type} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-build_path="build-${build_type}"
+# 2. Build latest Derecho library
+WORKDIR /root/workspace/derecho
+RUN mv /root/workspace/derecho/scripts/build/build.sh /root/workspace/
+RUN git fetch --all && git reset --hard origin/master
+RUN git checkout df81fa4888861d796a1e20e459da7ff36737e40e
+RUN mv /root/workspace/build.sh /root/workspace/derecho/scripts/build/
+RUN rm -rf /root/workspace/derecho/build-Release
+RUN ./build.sh Release
+WORKDIR /root/workspace/derecho/build-Release
+RUN make -j32
+RUN make install
 
-if [[ $2 == "USE_VERBS_API" ]]; then
-    cmake_defs="${cmake_defs} -DUSE_VERBS_API=1"
-fi
+# 3. Build latest Cascade library
+WORKDIR /root/workspace/cascade
+RUN git fetch --all && git reset --hard origin/master
+RUN git checkout 854f08c268ca9af50580593c54b75d566b94dd92
 
-# begin building...
-rm -rf ${build_path} 2>/dev/null
-mkdir ${build_path}
-cd ${build_path}
-cmake ${cmake_defs} ..
-make -j `nproc` 2>err.log
-cd ..
+# 3.1 install dependency
+RUN apt-get install ragel
+WORKDIR /root/workspace/cascade/scripts/prerequisites
+RUN ./install-hyperscan.sh
+RUN apt install python3-dev
+RUN pip3 install numpy
+RUN pip3 install build pybind11
+
+# 3.2 install Cascade with Python dependency
+WORKDIR /root/workspace/cascade
+COPY ./build.sh /root/workspace/cascade/
+RUN chmod +x /root/workspace/cascade/build.sh
+RUN rm -rf build-Release
+RUN ./build.sh Release
+RUN apt-get update -y
+RUN apt-get install -y python3.10-venv
+WORKDIR /root/workspace/cascade/build-Release
+RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.10/dist-packages/pybind11/share/cmake/pybind11/ ..
+RUN make -j32
+RUN make install
+
+
+# 3.3 build python udl
+WORKDIR /root/workspace/cascade/src/applications
+ARG GITHUB_TOKEN
+RUN git clone https://$GITHUB_TOKEN@github.com/Derecho-Project/cascade-demos.git 
+WORKDIR /root/workspace/cascade/
+RUN sed -i '107i\add_subdirectory(src/applications/cascade-demos/udl_zoo/python)' ./CMakeLists.txt
+# 3.3.2 rebuild Cascade with udl
+WORKDIR /root/workspace/cascade/build-Release
+RUN make -j32
+RUN make install
