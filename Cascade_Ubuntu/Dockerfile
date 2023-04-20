@@ -1,46 +1,83 @@
-FROM songweijia/devel:cascade.generic.ubuntu22.04
+#!/bin/bash
 
-LABEL maintainer="yy354@cornell.edu"
-EXPOSE 22/tcp
-RUN apt update
-RUN apt upgrade -y --fix-missing
+# case insensitive for string comparison
+shopt -s nocasematch
 
-ENV LOCAL_OPT=/root/opt-dev
-ENV C_INCLUDE_PATH=$LOCAL_OPT/include
-ENV CPLUS_INCLUDE_PATH=$LOCAL_OPT/include
-ENV CMAKE_PREFIX_PATH=$LOCAL_OPT/
-ENV LIBRARY_PATH=$LOCAL_OPT/lib/:/usr/local/lib/
-ENV LD_LIBRARY_PATH=$LOCAL_OPT/lib/:/usr/local/lib/
-ENV JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64/
+colorful_print() {
+    color_prefix="0;30"
+    case $1 in
+        "red")
+            color_prefix="0;31"
+            ;;
+        "green")
+            color_prefix="0;32"
+            ;;
+        "orange")
+            color_prefix="0;33"
+            ;;
+        "blue")
+            color_prefix="0;34"
+            ;;
+        "purple")
+            color_prefix="0;35"
+            ;;
+        "cyan")
+            color_prefix="0;36"
+            ;;
+        "lightgray")
+            color_prefix="0;37"
+            ;;
+        "darkgray")
+            color_prefix="1;30"
+            ;;
+        "lightred")
+            color_prefix="1;31"
+            ;;
+        "lightgreen")
+            color_prefix="1;32"
+            ;;
+        "yellow")
+            color_prefix="1;33"
+            ;;
+        "lightblue")
+            color_prefix="1;34"
+            ;;
+        "lightpurple")
+            color_prefix="1;35"
+            ;;
+        "lightcyan")
+            color_prefix="1;36"
+            ;;
+        "white")
+            color_prefix="1;37"
+            ;;
+    esac;
+    echo -e "\e[${color_prefix}m $2 $3 $4 $5 $6 $7 $8 $9 \e[0m"
+}
 
-COPY ./clean_build.sh /root/
-RUN chmod +x /root/clean_build.sh
+if [[ $# -lt 1 ]]; then
+    colorful_print orange "USAGE: $0 <Release|Debug|RelWithDebInfo|Benchmark|Clear> [USE_VERBS_API]"
+    exit -1
+fi
 
+if [[ $1 == "Clear" ]]; then
+    rm -rf build-*
+    exit 0
+fi
 
-# py_cascade
-# 1. dependency install
-# 1.1 PYTHON dependency
-RUN apt-get update -y
-RUN apt-get install -y python3.10-venv
-# 1.2 pybind11
-# below command install pybind11 to /usr/local/lib/python3.10/dist-packages
-RUN pip3 install build pybind11
+build_type=$1
+install_prefix="/root/opt-dev/"
+cmake_defs="-DCMAKE_BUILD_TYPE=${build_type} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+build_path="build-${build_type}"
 
-# 2. link dependency in cmake
-COPY ./build.sh /root/workspace/cascade/
-RUN chmod +x /root/workspace/cascade/build.sh
-WORKDIR /root/workspace/cascade/
-RUN ./build.sh Release
-WORKDIR /root/workspace/cascade/build-Release
-RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.10/dist-packages/pybind11/share/cmake/pybind11/ ..
-# RUN make -j --debug
-# RUN make install
+if [[ $2 == "USE_VERBS_API" ]]; then
+    cmake_defs="${cmake_defs} -DUSE_VERBS_API=1"
+fi
 
-# # 3. 
-# # # build cascade_py
-# WORKDIR /root/workspace/cascade/build-Release/src/service/python/dist
-# RUN pip3 install derecho.cascade-1.0rc0-py3-none-any.whl 
-
-
-# entry point
-WORKDIR /root
+# begin building...
+rm -rf ${build_path} 2>/dev/null
+mkdir ${build_path}
+cd ${build_path}
+cmake ${cmake_defs} ..
+make -j `nproc` 2>err.log
+cd ..
