@@ -90,5 +90,13 @@ ENV PATH=$PATH:/root/opt-dev/bin
 WORKDIR /root
 RUN mkdir example
 RUN cp -r workspace/cascade/build-Release/src/applications/tests/user_defined_logic ./example
+RUN rm -rf ./example/user_defined_logic/CMakeFiles
+RUN rm ./example/user_defined_logic/Makefile
+RUN rm ./example/user_defined_logic/cmake_install.cmake
 RUN mkdir example/python_udl
 RUN cp -r workspace/cascade/build-Release/src/applications/cascade-demos/udl_zoo/python/* ./example/python_udl
+RUN rm -rf ./example/python_udl/CMakeFiles
+RUN rm ./example/python_udl/Makefile
+RUN rm -rf ./example/python_udl/*.cmake
+RUN rm -rf ./example/python_udl/*.tmp
+RUN rm ./example/python_udl/dfgs.json.tmp.multiapp
