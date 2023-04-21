@@ -71,6 +71,10 @@ Run `cascade_client` Then it will shows command line prompt.
 
 Run `help` could shows detailed command line options (https://github.com/Derecho-Project/cascade/tree/master/src/service)
 
+
+
+3.2. Trigger User Defined Logic
+
 To trigger the user defined function, which in python_udls it defines two DFG(dataflow graphs). (The dataflow graph DFG definition can be viewed at ~/example/python_udl/cfg/n0/dfgs.json file)
 
 They could be triggered via '/' seprated prefix matching. By running: `put VCSS /console_printer/key0 value0 0 0`, you triggered the DFG with first pathname is '/console_printer'
@@ -81,7 +85,8 @@ There are three main ways to interact with(store to) Cascade Service that corres
 - PCSS: PersistentCascadeStoreWithStringKey
 - TCSS: TriggerCascadeStoreWithStringKey
 
-3.2. Python client
+
+3.3. Python client
 
 Run `python` at in node n2, allows you to access the installed Cascade python support
 
