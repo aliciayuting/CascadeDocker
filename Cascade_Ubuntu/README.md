@@ -43,7 +43,7 @@ This docker image is built to support the all of the following functionalties.
           - libpython_udl.so: The pre-written user defined logic function to read the user defined logic in python and load to cascade server
 
           - python_udls: folder contains all the user defined udls written in python
-                         (User can add/change the python implementation in this directory. To have the cascade server to load the user defined python function, need to change dfgs.json files in ~/example/python_udl/cfg/n0~n1 for all the server node configs)
+                         (User can add/change the python implementation in this directory. To have the cascade server to load the user defined python function, adding the changes to dfgs.json files in ~/example/python_udl/cfg/n0, ~/example/python_udl/cfg/n1)
 
 
 # Run Example
@@ -66,18 +66,18 @@ To run Cascde server nodes and client node, it requires to be run in three diffe
 
 There are several ways to run cascade client.
      3.1. Command line client
-          - Run `cascade_client`
-          Then it will shows command line prompt.  
+     - Run `cascade_client` Then it will shows command line prompt.  
 
-          - Run `help` could shows detailed command line options (https://github.com/Derecho-Project/cascade/tree/master/src/service)
+     - Run `help` could shows detailed command line options (https://github.com/Derecho-Project/cascade/tree/master/src/service)
 
-          - To trigger the user defined function, which in python_udls it defines two DFG(dataflow graphs). (The dataflow graph DFG definition can be viewed at ~/example/python_udl/cfg/n0/dfgs.json file)
+     - To trigger the user defined function, which in python_udls it defines two DFG(dataflow graphs). (The dataflow graph DFG definition can be viewed at ~/example/python_udl/cfg/n0/dfgs.json file)
 
-          - They could be triggered via '/' seprated prefix matching, by running: `put VCSS /console_printer/key0 value0 0 0`, you trigger the DFG with first pathname is '/console_printer'
+     - They could be triggered via '/' seprated prefix matching, by running: `put VCSS /console_printer/key0 value0 0 0`, you trigger the DFG with first pathname is '/console_printer'
 
-          - There are three main ways to interact with(store to) Cascade Service that corresponde to three Subgroup types:
-               - VCSS: VolatileCascadeStoreWithStringKey
-               - PCSS: PersistentCascadeStoreWithStringKey
-               - TCSS: TriggerCascadeStoreWithStringKey
+     - There are three main ways to interact with(store to) Cascade Service that corresponde to three Subgroup types:
+          - VCSS: VolatileCascadeStoreWithStringKey
+          - PCSS: PersistentCascadeStoreWithStringKey
+          - TCSS: TriggerCascadeStoreWithStringKey
 
+     3.2. 
 
