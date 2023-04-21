@@ -65,19 +65,29 @@ To run Cascde server nodes and client node, it requires to be run in three diffe
      In another terminal, direct to n2 config
 
 There are several ways to run cascade client.
-     3.1. Command line client
-     - Run `cascade_client` Then it will shows command line prompt.  
 
-     - Run `help` could shows detailed command line options (https://github.com/Derecho-Project/cascade/tree/master/src/service)
+3.1. Command line client
+Run `cascade_client` Then it will shows command line prompt.  
 
-     - To trigger the user defined function, which in python_udls it defines two DFG(dataflow graphs). (The dataflow graph DFG definition can be viewed at ~/example/python_udl/cfg/n0/dfgs.json file)
+Run `help` could shows detailed command line options (https://github.com/Derecho-Project/cascade/tree/master/src/service)
 
-     - They could be triggered via '/' seprated prefix matching, by running: `put VCSS /console_printer/key0 value0 0 0`, you trigger the DFG with first pathname is '/console_printer'
+To trigger the user defined function, which in python_udls it defines two DFG(dataflow graphs). (The dataflow graph DFG definition can be viewed at ~/example/python_udl/cfg/n0/dfgs.json file)
 
-     - There are three main ways to interact with(store to) Cascade Service that corresponde to three Subgroup types:
-          - VCSS: VolatileCascadeStoreWithStringKey
-          - PCSS: PersistentCascadeStoreWithStringKey
-          - TCSS: TriggerCascadeStoreWithStringKey
+They could be triggered via '/' seprated prefix matching. By running: `put VCSS /console_printer/key0 value0 0 0`, you triggered the DFG with first pathname is '/console_printer'
+By running: `put VCSS /word_count/mapper/key0 value0 0 0`, you triggered 'Word Count Python DFG, a demo of DFG without performance consideration'
 
-     3.2. 
+There are three main ways to interact with(store to) Cascade Service that corresponde to three Subgroup types:
+- VCSS: VolatileCascadeStoreWithStringKey
+- PCSS: PersistentCascadeStoreWithStringKey
+- TCSS: TriggerCascadeStoreWithStringKey
+
+3.2. Python client
+
+Run `python` at in node n2, allows you to access the installed Cascade python support
+
+In the command prompt, you can import via: `from derecho.cascade.external_client import ServiceClientAPI`
+
+and access the api via: `capi = ServiceClientAPI()`
+
+This API, allows user to define python client program and directly run python client
 
