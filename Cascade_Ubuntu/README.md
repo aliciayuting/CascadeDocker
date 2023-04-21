@@ -24,10 +24,10 @@ This docker image is built to support the all of the following functionalties.
 .
 |-- example:
 |   |-- user_defined_logic: copied from the built folder in ~/workspace/cascade/src/applications/tests/user_defined_logic. 
-|   |-- console_printer_cfg: contains the cascade servers & client configs
-     |   |-- n0: include 4 configs for Cascade Server node n0 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
-     |   |-- n1: include 4 configs for Cascade Server node n1 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
-     |   |-- n2: include config for Cascade Client to start: derecho.cfg. (This node could also run as Cascade Server, in which case, all 4 configs in this directory are used)
+     |   |-- console_printer_cfg: contains the cascade servers & client configs
+          |   |-- n0: include 4 configs for Cascade Server node n0 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
+          |   |-- n1: include 4 configs for Cascade Server node n1 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
+          |   |-- n2: include config for Cascade Client to start: derecho.cfg. (This node could also run as Cascade Server, in which case, all 4 configs in this directory are used)
      |   |-- libconsole_printer_udl.so: compiled user defined logic funciton in the form of the dynamic linked library. The original code and implementation of this function is at directory: ~/workspace/cascade/src/applications/tests/user_defined_logic/console_printer_udl.cpp
 |   |-- python_udl: copied from the built folder in ~/workspace/cascade/src/applications/cascade-demos/udl_zoo/python, where the executables get compiled
      |   |-- cfg
