@@ -20,31 +20,22 @@ This docker image is built to support the all of the following functionalties.
 
 - workspace: contains the Cascade and Derecho code, this directory is mainly used for Cascade&Derecho development 
 
-- example:
-
-     - user_defined_logic: copied from the built folder in ~/workspace/cascade/src/applications/tests/user_defined_logic. 
-
-          - console_printer_cfg: contains the cascade servers & client configs
-
-               - n0: include 4 configs for Cascade Server node n0 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
-
-               - n1: include 4 configs for Cascade Server node n1 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
-
-               - n2: include config for Cascade Client to start: derecho.cfg. (This node could also run as Cascade Server, in which case, all 4 configs in this directory are used)
-
-          - libconsole_printer_udl.so: compiled user defined logic funciton in the form of the dynamic linked library. The original code and implementation of this function is at directory: ~/workspace/cascade/src/applications/tests/user_defined_logic/console_printer_udl.cpp
-
-     - python_udl: copied from the built folder in ~/workspace/cascade/src/applications/cascade-demos/udl_zoo/python, where the executables get compiled
-
-          - cfg
-
-               - n0 ~ n2: config files to run node n0 ~ n2
-
-          - libpython_udl.so: The pre-written user defined logic function to read the user defined logic in python and load to cascade server
-
-          - python_udls: folder contains all the user defined udls written in python
+```bash
+.
+|-- example:
+|   |-- user_defined_logic: copied from the built folder in ~/workspace/cascade/src/applications/tests/user_defined_logic. 
+|   |-- console_printer_cfg: contains the cascade servers & client configs
+     |   |-- n0: include 4 configs for Cascade Server node n0 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
+     |   |-- n1: include 4 configs for Cascade Server node n1 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
+     |   |-- n2: include config for Cascade Client to start: derecho.cfg. (This node could also run as Cascade Server, in which case, all 4 configs in this directory are used)
+     |   |-- libconsole_printer_udl.so: compiled user defined logic funciton in the form of the dynamic linked library. The original code and implementation of this function is at directory: ~/workspace/cascade/src/applications/tests/user_defined_logic/console_printer_udl.cpp
+|   |-- python_udl: copied from the built folder in ~/workspace/cascade/src/applications/cascade-demos/udl_zoo/python, where the executables get compiled
+     |   |-- cfg
+          |   |-- n0 ~ n2: config files to run node n0 ~ n2
+          |   |-- libpython_udl.so: The pre-written user defined logic function to read the user defined logic in python and load to cascade server
+     |   |-- python_udls: folder contains all the user defined udls written in python
                          (User can add/change the python implementation in this directory. To have the cascade server to load the user defined python function, adding the changes to dfgs.json files in ~/example/python_udl/cfg/n0, ~/example/python_udl/cfg/n1)
-
+```
 
 # Run Example
 In /root/example, there are two set of Cascade configurations(user_defined_logic, python_udl), either one could run Cascade Servers and Client.
