@@ -19,7 +19,10 @@ shift
 
 case "$action" in
   build)
-    docker build -t yy354/cascade_docker:v1.0 --build-arg GITHUB_TOKEN=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 .
+    docker build -t yy354/cascade_docker:v1.0 --build-arg GITHUB_TOKEN={REPLACE_THIS} .
+    ;;
+  push)
+    docker push yy354/cascade_docker:v1.0
     ;;
   run)
     docker run -P --privileged -d -it --name=alicasenv yy354/cascade_docker:v1.0

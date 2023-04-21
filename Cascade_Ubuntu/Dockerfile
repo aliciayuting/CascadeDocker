@@ -60,15 +60,30 @@ WORKDIR /root/workspace/cascade/build-Release
 RUN cmake -Dpybind11_DIR=/usr/local/lib/python3.10/dist-packages/pybind11/share/cmake/pybind11/ ..
 RUN make -j32
 RUN make install
+# # build cascade_py
+WORKDIR /root/workspace/cascade/build-Release/src/service/python/dist
+RUN pip3 install derecho.cascade-1.0rc0-py3-none-any.whl 
 
 
 # 3.3 build python udl
 WORKDIR /root/workspace/cascade/src/applications
 ARG GITHUB_TOKEN
 RUN git clone https://$GITHUB_TOKEN@github.com/Derecho-Project/cascade-demos.git 
+WORKDIR /root/workspace/cascade/src/applications/cascade-demos
+RUN git checkout collision_prediction
+# 3.3.1 temp fix in code due to compilation error 
+WORKDIR /root/workspace/cascade/src/applications/cascade-demos/udl_zoo/python
+RUN sed -i '18d' ./python_udl.cpp
+RUN sed -i '18i\#define PYTHONLIB   \"libpython\"' ./python_udl.cpp
+RUN sed -i '19i\#define Python3_VERSION_MAJOR \".\" ' ./python_udl.cpp
+RUN sed -i '20i\#define Python3_VERSION_MINOR \".so\" ' ./python_udl.cpp
+
+# 3.3.2 Add this director to CMakeLists to compile
 WORKDIR /root/workspace/cascade/
 RUN sed -i '107i\add_subdirectory(src/applications/cascade-demos/udl_zoo/python)' ./CMakeLists.txt
-# 3.3.2 rebuild Cascade with udl
+# 3.3.3 rebuild Cascade with udl
 WORKDIR /root/workspace/cascade/build-Release
 RUN make -j32
 RUN make install
+
+ENV PATH=$PATH:/root/opt-dev/bin
