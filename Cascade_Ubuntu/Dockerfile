@@ -74,9 +74,7 @@ RUN git checkout collision_prediction
 # 3.3.1 temp fix in code due to compilation error 
 WORKDIR /root/workspace/cascade/src/applications/cascade-demos/udl_zoo/python
 RUN sed -i '18d' ./python_udl.cpp
-RUN sed -i '18i\#define PYTHONLIB   \"libpython\"' ./python_udl.cpp
-RUN sed -i '19i\#define Python3_VERSION_MAJOR \".\" ' ./python_udl.cpp
-RUN sed -i '20i\#define Python3_VERSION_MINOR \".so\" ' ./python_udl.cpp
+RUN sed -i '18i\#define PYTHONLIB   \"libpython_udl.so\" ' ./python_udl.cpp
 
 # 3.3.2 Add this director to CMakeLists to compile
 WORKDIR /root/workspace/cascade/
@@ -87,3 +85,9 @@ RUN make -j32
 RUN make install
 
 ENV PATH=$PATH:/root/opt-dev/bin
+
+# 3.4 Copy example cfg
+WORKDIR /root
+RUN mkdir example
+RUN cp -r workspace/cascade/build-Release/src/applications/tests/user_defined_logic ./example
+RUN cp -r workspace/cascade/build-Release/src/applications/cascade-demos/udl_zoo/python ./example
