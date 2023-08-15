@@ -56,11 +56,17 @@ To run Cascde server nodes and client node, it requires to be run in three diffe
 1. Start Cascade server node n0:
      In one terminal, direct to n0 config
       `cd root/example/ml_model_udl/cfg/n0`
+     
+     Remember to clear the log from previous run using the script `./clear_log.sh` before starting server node.
+
      Run cascade server node
       `cascade_server`
 2. Start Cascade server node n1:
      In a different terminal, direct to n1 config
       `cd root/example/ml_model_udl/cfg/n1`
+
+     Remember to clear the log from previous run using the script `./clear_log.sh` before starting server node.
+
      Run cascade server node
       `cascade_server`
 
