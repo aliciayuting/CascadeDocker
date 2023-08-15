@@ -23,7 +23,14 @@ Here are the steps of how to pull the docker image:
 1. ssh into the Ubuntu environment(container/virtual machine), install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
-```sudo docker run -P --privileged -d -it --name=casenv yy354/cascade_docker:v1.0```
+```sudo docker run --network host --gpus all -P --privileged -d -it --name=casenv yy354/cascade_docker:v1.0```
+
+
+```yy354/cascade_docker:v1.0``` is the docker image name.
+
+```--network host``` flag is to enable the container to access the host's network. If want to specify the specific IP address, one can use ```--ip={IP} ``` instead.
+
+```--gpus all``` flag is to enable the container to access the host's gpu
 
 3. Then run the below command to shift the terminal to the docker image container that we just built
 
