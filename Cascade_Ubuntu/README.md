@@ -59,8 +59,8 @@ In /root/example, there are three set of Cascade configurations(example/user_def
 ## Set Configuration
 There are two sets of configuration files, one defines the server node, the other set defines the dataflow graph (including the user-defined-logics ).
 
-#### derecho.cfg
-Derecho.cfg is the first set of configuration file, that defines the Cascade server node. Each server node folder contains a derecho.cfg, defining the network, layout, Derecho and Cascade server setting. You can find them under `root/example/ml_model_udl/cfg/n0`, `root/example/ml_model_udl/cfg/n1`, `root/example/ml_model_udl/cfg/n2`, `root/example/python_udl/cfg/n0`, ... `root/example/user_defined_logic/cfg/n0`, ...
+#### derecho.cfg & layout.json
+Derecho.cfg and layout.json are the first set of configuration file, that defines the Cascade server node. Each server node folder contains a derecho.cfg, defining the network, layout, Derecho and Cascade server setting. You can find them under `root/example/ml_model_udl/cfg/n0`, `root/example/ml_model_udl/cfg/n1`, `root/example/ml_model_udl/cfg/n2`, `root/example/python_udl/cfg/n0`, ... `root/example/user_defined_logic/cfg/n0`, ...
 
 The default setting defines all Cascade nodes on the same server using local host network interface: 127.0.0.1, and tcp network. One can edit this by specify the fields in derecho.cfg `leader_ip=` and `local_ip=` as needed by the applications. One can also specify the corresponding network provider under the field `provider = ` accordingly.
 
