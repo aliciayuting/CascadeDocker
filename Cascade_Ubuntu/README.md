@@ -104,3 +104,6 @@ and access the api via: `capi = ServiceClientAPI()`
 
 This API, allows user to define python client program and directly run python client
 
+
+### Example Client code 
+In directory `root/example/ml_model_udl/cfg/n2` we wrote a sample python cliden code, that you can start with and customize to your applications.
