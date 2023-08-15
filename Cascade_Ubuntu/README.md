@@ -33,13 +33,13 @@ Interfaces:
 ```bash
 .
 |-- example:
-|   |-- user_defined_logic: copied from the built folder in root/workspace/cascade/src/applications/tests/user_defined_logic. 
+|   |-- user_defined_logic
      |   |-- console_printer_cfg: contains the cascade servers & client configs
-          |   |-- n0: include 4 configs for Cascade Server node n0 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
-          |   |-- n1: include 4 configs for Cascade Server node n1 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
-          |   |-- n2: include config for Cascade Client to start: derecho.cfg. (This node could also run as Cascade Server, in which case, all 4 configs in this directory are used)
-     |   |-- libconsole_printer_udl.so: compiled user defined logic funciton in the form of the dynamic linked library. The original code and implementation of this function is at directory: root/workspace/cascade/src/applications/tests/user_defined_logic/console_printer_udl.cpp
-|   |-- python_udl: copied from the built folder in root/workspace/cascade/src/applications/cascade-demos/udl_zoo/python, where the executables get compiled
+          |   |-- n0: include configs for Cascade Server node n0 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
+          |   |-- n1: include configs for Cascade Server node n1 to start: dfgs.json, layout.json, udl_dlls.cfg, derecho.cfg
+          |   |-- n2: include config for Cascade Client to start: derecho.cfg. (This node could also run as Cascade Server)
+     |   |-- libconsole_printer_udl.so: compiled user defined logic funciton in the form of the dynamic linked library. As specified by udl_dlls.cfg, it can be accessed by all server nodes. The original code and implementation of this function is at directory: root/workspace/cascade/src/applications/tests/user_defined_logic/console_printer_udl.cpp
+|   |-- python_udl
      |   |-- cfg
           |   |-- n0 ~ n2: config files to run node n0 ~ n2
           |   |-- libpython_udl.so: The pre-written user defined logic function to read the user defined logic in python and load to cascade server
@@ -51,13 +51,14 @@ Interfaces:
               |   |-- n2/client.py: client code to connect to the server nodes and send request to the system
      |   |-- python_udls: folder contains all the user defined udls written in python
           |   |-- resnet_udl.py : Python code that define a UDL with Resenet mode
+          |   |-- imagenet_classes.txt : contains the categories used by image net model
 ```
 
 # Run Example
-In /root/example, there are three set of Cascade configurations(example/user_defined_logic, example/python_udl, example/ml_model_udl). example/user_defined_logic folder contains the example code of creating UDL(user-defined-logic) in C++; example/python_udl folder contains example of creating UDL(user-defined-logic) in Python code; example/ml_model_udl contains example of UDL(user-defined-logic) using Resnet model. All sets of example could run Cascade Servers and Client. In this documentation, we introdece steps to run example/ml_model_udl. Similar steps could be applied to the other ones
+In /root/example, there are three set of Cascade configurations(example/user_defined_logic, example/python_udl, example/ml_model_udl). example/user_defined_logic folder contains the example code of creating UDL(user-defined-logic) in C++; example/python_udl folder contains example of creating UDL(user-defined-logic) in Python code; example/ml_model_udl contains example of UDL(user-defined-logic) using Resnet model. All sets of example could run and be customized. In this documentation, we introdece steps to run example/ml_model_udl. Similar steps could be applied to the other ones
 
 ## Set Configuration
-There are two sets of configuration files, one defines the server node, the other set defines the dataflow graph (including the user-defined-logics ).
+There are two sets of configuration files, one defines the server node, the other set defines the dataflow graph (including the user-defined-logics ). One can also customize and add more nodes to the /cfg if were to scale up to larger scale, by correctly putting the configuration files as defined below.
 
 #### derecho.cfg & layout.json
 Derecho.cfg and layout.json are the first set of configuration file, that defines the Cascade server node. Each server node folder contains a derecho.cfg, defining the network, layout, Derecho and Cascade server setting. You can find them under `root/example/ml_model_udl/cfg/n0`, `root/example/ml_model_udl/cfg/n1`, `root/example/ml_model_udl/cfg/n2`, `root/example/python_udl/cfg/n0`, ... `root/example/user_defined_logic/cfg/n0`, ...
