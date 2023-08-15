@@ -26,12 +26,9 @@ Interfaces:
 
 # Directories
 
-- opt-dev: contains the pre-built Cascade&Derecho binaries and libraries
-
-- workspace: contains the Cascade and Derecho code, this directory is mainly used for Cascade&Derecho development 
 
 ```bash
-.
+/root
 |-- example:
 |   |-- user_defined_logic
      |   |-- console_printer_cfg: contains the cascade servers & client configs

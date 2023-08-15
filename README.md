@@ -37,9 +37,10 @@ Here are the steps of how to pull the docker image:
 ```sudo docker exec -it -u0  casenv bash```
 
 4. By now, you should be able to see the setup in the folder.
+     - example folder contains the starter code with examples. More details can be found at: https://github.com/aliciayuting/CascadeDocker/blob/py_udl_docker/Cascade_Ubuntu/README.md
      - opt-dev folder contains all the dependencies and libraries needed to run Cascade
      - Derecho is a group management system that Cascade is built upon. Derecho folder contains all the build files for the Derecho program.
-     - Cascade folder is the one we will be work with. Inside the cascade folder you can find a folder called build-Release. This folder contains successfully compiled executables. We will mainly work with this folder to run the Cascade server and Cascade client.
+     - Cascade folder contains the implementation and executable of cascade. Inside the cascade folder you can find a folder called build-Release. This folder contains successfully compiled executables. We will mainly work with this folder to run the Cascade server and Cascade client.
 
 ```bash
 .
@@ -77,6 +78,7 @@ Here are the steps of how to pull the docker image:
     |   |-- scripts
     |   |-- src
     |-- prerequisites
+|-- examples
 ```
 
 
