@@ -107,3 +107,5 @@ This API, allows user to define python client program and directly run python cl
 
 ### Example Client code 
 In directory `root/example/ml_model_udl/cfg/n2` we wrote a sample python cliden code, that you can start with and customize to your applications.
+
+You can start by running ```python client.py``` from `root/example/ml_model_udl/cfg/n2` directory.
