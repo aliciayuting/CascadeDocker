@@ -1,8 +1,18 @@
 # Overview
 Cascade is a C++17 cloud application framework powered by optimized RDMA data paths. It provides a K/V API for data manipulation in distributed memory and persistent storage. Besides the K/V API, Cascade allows injecting logic on the data paths for low-latency application. 
 
-This docker image is built to support the all of the following functionalties.
+This docker image contains Cascade three examples and interfaces, demonstrating how to run and customize it to your application scenerio.
 
+Examples:
+- C++ User defined logic (UDL) 
+
+- Python User defined logic
+     - word count example
+     - console printer printout example
+     - Resnet ML model example
+
+
+Interfaces: 
 - Command line client API interacts with Cascade Servers
 
 - Python client API interacts with Cascade Servers
