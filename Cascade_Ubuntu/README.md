@@ -44,10 +44,20 @@ This docker image is built to support the all of the following functionalties.
 ```
 
 # Run Example
-In /root/example, there are two set of Cascade configurations(example/user_defined_logic, example/python_udl). example/user_defined_logic folder contains the example code of creating UDL(user-defined-logic) in C++; example/python_udl folder contains example of creating UDL(user-defined-logic) in Python code. Either one could run Cascade Servers and Client.
+In /root/example, there are three set of Cascade configurations(example/user_defined_logic, example/python_udl, example/ml_model_udl). example/user_defined_logic folder contains the example code of creating UDL(user-defined-logic) in C++; example/python_udl folder contains example of creating UDL(user-defined-logic) in Python code; example/ml_model_udl contains example of UDL(user-defined-logic) using Resnet model. All sets of example could run Cascade Servers and Client. In this documentation, we introdece steps to run example/ml_model_udl. Similar steps could be applied to the other ones
 
 ## Set Configuration
-Configuration 
+There are two sets of configuration files, one defines the server node, the other set defines the dataflow graph (including the user-defined-logics ).
+
+#### derecho.cfg
+Derecho.cfg is the first set of configuration file, that defines the Cascade server node. Each server node folder contains a derecho.cfg, defining the network, layout, Derecho and Cascade server setting. You can find them under `root/example/ml_model_udl/cfg/n0`, `root/example/ml_model_udl/cfg/n1`, `root/example/ml_model_udl/cfg/n2`, `root/example/python_udl/cfg/n0`, ... `root/example/user_defined_logic/cfg/n0`, ...
+
+The default setting defines all Cascade nodes on the same server using local host network interface: 127.0.0.1, and tcp network. One can edit this by specify the fields in derecho.cfg `leader_ip=` and `local_ip=` as needed by the applications. One can also specify the corresponding network provider under the field `provider = ` accordingly.
+
+#### udl_dlls.cfg.tmp & dfgs.json.tmp
+udl_dlls.cfg, and dfgs.json is the second set of configuration file, that defines the user-defined-logic(UDL) and their dependencies in the form of dataflow graphs(DFG). Each node require these two configuration in order to register and run the user defined logic(UDL). 
+
+In the container image, we linked these two files to  `root/example/ml_model_udl/cfg/udl_dlls.cfg.tmp`, and `root/example/ml_model_udl/cfg/dfgs.json.tmp`. So that one only need to change these two configuration once at these two directory, and the corresponding files at `root/example/ml_model_udl/cfg/n0/udl_dlls.cfg`, `root/example/ml_model_udl/cfg/n1/udl_dlls.cfg` and `root/example/ml_model_udl/cfg/n2/udl_dlls.cfg` are changed at the same time.
 
 ## Start Cascade server 
 
