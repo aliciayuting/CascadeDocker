@@ -81,4 +81,4 @@ Here are the steps of how to pull the docker image:
 
 
 ## Running Cascade
-Check on this link for more details: https://github.com/aliciayuting/CascadeDocker/blob/py_udl_docker/Cascade_Ubuntu/README.md
+Check on this link for more details: https://github.com/aliciayuting/CascadeDocker/tree/main/Cascade_Ubuntu
