@@ -1,16 +1,14 @@
 # How to use Cascade from docker image
 ## Running Environment
-### Cascade runtime require:
-- Ubuntu22, with C++ compiler supporting C++17: GCC 8.3+, Python3.10
-
-- More dependencies can be viewed on Cascade github repository: https://github.com/Derecho-Project/cascade.git
+### Overview about Cascade:
+This is a docker image based on open-sourced project Cascade, more details on Cascade could be viewed at Cascade github repository: https://github.com/Derecho-Project/cascade.git
 
 
 ### Docker image runtime environment
 
-To make the process of installing Cascade dependencies and compilation easier, we provide a docker image that you can directly download and run. In the docker image, it pre-built the correct environment, the required packages and the compiled executable for Cascade to run.
+As a quick-start to Cascade, we provide a docker image that you can directly download and run. In the docker image, it has pre-built the correct environment, the required packages and the compiled executable for Cascade to run.
 
-The docker image needs to be run at an Ubuntu environment, and the machine needs to contain ***\>= 2 CPUs and \>=800MB memory***
+The docker image needs to be run in an Ubuntu environment, and needs to be allocated with ***\>= 2 CPUs and \>=800MB memory***
 
 - Container environment: 
      - For windows user you can run the docker in the wsl2 (Windows Subsystem for Linux, which is a kernel built by Microsoft, allowing Linux containers to run natively without emulation)
@@ -20,7 +18,7 @@ Another easy way to access the environment is to use Virtual Machine, and select
 
 ## Docker Image
 Here are the steps of how to pull the docker image:
-1. ssh into the Ubuntu environment(container/virtual machine), install docker on the machine(container/VM)
+1. In the Ubuntu environment, install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
 ```sudo docker run --network host --gpus all -P --privileged -d -it --name=casenv yy354/cascade_docker_ml:v1.0```
