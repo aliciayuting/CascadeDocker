@@ -1,20 +1,20 @@
 # How to use Cascade from docker image
 ## Running Environment
 ### Cascade runtime require:
-- Ubuntu18 or Ubuntu20, with C++ compiler supporting C++17: GCC 8.3+, Python3.10
+- Ubuntu22, with C++ compiler supporting C++17: GCC 8.3+, Python3.10
 
 - More dependencies can be viewed on Cascade github repository: https://github.com/Derecho-Project/cascade.git
 
 
 ### Docker image runtime environment
 
-To make the process of installing Cascade dependencies and compilation easier, we provide a docker image that you can directly run in an Ubuntu environment. Using the docker image, it automatically provides the correct environment and contains the required packages and the succesfully compiled executable for you to run Cascade.
+To make the process of installing Cascade dependencies and compilation easier, we provide a docker image that you can directly download and run. In the docker image, it pre-built the correct environment, the required packages and the compiled executable for Cascade to run.
 
-The docker image needs to be run on Ubuntu environment, and the machine needs to contain ***\>= 2 CPUs and \>=800MB memory***
+The docker image needs to be run at an Ubuntu environment, and the machine needs to contain ***\>= 2 CPUs and \>=800MB memory***
 
 - Container environment: 
      - For windows user you can run the docker in the wsl2 (Windows Subsystem for Linux, which is a kernel built by Microsoft, allowing Linux containers to run natively without emulation)
-     - You can also setup a container instance on Azure
+     - You can also setup a VM or linux container instance on the local machine or cloud server to run
 - Virtual Machine(VM): 
 Another easy way to access the environment is to use Virtual Machine, and select the virtual machine with at least 2 CPUs, and 800MB memory. 
 
