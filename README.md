@@ -26,7 +26,7 @@ Here are the steps of how to pull the docker image:
 
 ```yy354/cascade_docker:v1.0``` is the docker image name.
 
-```--network host``` flag is to enable the container to access the host's network. A better way is to use bridge network with port forwarding: https://docs.docker.com/network/drivers/bridge/, by creating a bridge network via: ```docker network create mynetwork``` and ```--network mynetwork -p <container_ip>``` flag when running docker run.
+```--network host``` flag is to enable the container to access the host's network. Another way is to use bridge network with port forwarding: https://docs.docker.com/network/drivers/bridge/, by creating a bridge network via: ```docker network create --subnet=<subnet_cidr> mynetwork``` and ```--network mynetwork -p <container_ip>``` flag when running docker run.
 
 ```--gpus all``` flag is to enable the container to access the host's gpu
 
