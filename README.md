@@ -21,7 +21,7 @@ Here are the steps of how to pull the docker image:
 1. In the Ubuntu environment, install docker on the machine(container/VM)
 2. run the below command to pull and run the docker image
 
-```sudo docker run --network host --gpus all -P --privileged -d -it --name=casenv yy354/cascade_docker_ml:v1.0```
+```sudo docker run --network host --gpus all -P --privileged -d -it --name=casenv yy354/cascade_docker_ml:v2.0```
 
 
 ```yy354/cascade_docker:v1.0``` is the docker image name.
