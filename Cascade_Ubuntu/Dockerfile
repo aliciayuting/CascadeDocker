@@ -25,10 +25,9 @@ RUN rm -rf /root/opt-dev/share/derecho
 
 # 2. Build latest Derecho library
 WORKDIR /root/workspace/derecho
-RUN mv /root/workspace/derecho/scripts/build/build.sh /root/workspace/
 RUN git fetch --all && git reset --hard origin/master
-RUN git checkout df81fa4888861d796a1e20e459da7ff36737e40e
-RUN mv /root/workspace/build.sh /root/workspace/derecho/scripts/build/
+RUN git checkout 0d5f866f462fa3f9c5cdd5a2d8b0cc54dac4f275
+COPY ./derecho_build.sh /root/workspace/derecho/scripts/build/build.sh
 RUN rm -rf /root/workspace/derecho/build-Release
 RUN ./build.sh Release
 WORKDIR /root/workspace/derecho/build-Release
@@ -38,7 +37,8 @@ RUN make install
 # 3. Build latest Cascade library
 WORKDIR /root/workspace/cascade
 RUN git fetch --all && git reset --hard origin/master
-RUN git checkout 854f08c268ca9af50580593c54b75d566b94dd92
+# Set checkpoint to v1.0.0
+RUN git checkout 24e53f93d4fd0ff39ac72e0e82303f372cb6abba
 
 # 3.1 install dependency
 RUN apt-get install ragel
@@ -50,7 +50,7 @@ RUN pip3 install build pybind11
 
 # 3.2 install Cascade with Python dependency
 WORKDIR /root/workspace/cascade
-COPY ./build.sh /root/workspace/cascade/
+COPY ./cascade_build.sh /root/workspace/cascade/build.sh
 RUN chmod +x /root/workspace/cascade/build.sh
 RUN rm -rf build-Release
 RUN ./build.sh Release
