@@ -22,7 +22,7 @@ Images to choose from:
 
 - Cascade v1.0.0 version docker image for development: ```yy354/cascade_docker:v1.0.0```
 
-- Cascade fuse updated version included docker image for development: ```yy354/casfuse_docker:v1.0```
+- Cascade fuse updated version included docker image for development: ```yy354/cas_fuse_dev:v1.0.0```
 
 
 Here are the steps of how to pull the docker image:
